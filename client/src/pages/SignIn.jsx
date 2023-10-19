@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInStart, signInFaliure ,signInSuccess } from '../redux/user/userSlice';
+import OAuth from '../components/OAuth';
 
 function SignIn() {
     const [formData , setFormData ] = useState({});
@@ -60,6 +61,7 @@ function SignIn() {
           <input type="submit" value={loading ? 'Loading' : 'Sign Up'}disabled={loading}
           className=' bg-green-700 text-white p-3 rounded-lg uppercase hover:opacity-80 disabled:opacity-60'
           />
+          <OAuth />
         </form>
         <div className='flex gap-2 mt-4'>
           <p>Dont hava an account?</p>
