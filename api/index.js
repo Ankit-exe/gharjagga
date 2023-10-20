@@ -2,11 +2,14 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 require("dotenv").config();
+const cookieParser = require("cookie-parser");
 app.use(express.json());
+app.use(cookieParser());
 
 const dbconfig = require("./config/dbconfig");
 const userRouter = require("./routes/user.route");
 const authRouter = require("./routes/auth.route");
+
 
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
