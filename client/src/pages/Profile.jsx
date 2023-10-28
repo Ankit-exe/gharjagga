@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef, useEffect } from "react";
+import {Link} from "react-router-dom"
 import {
   getDownloadURL,
   getStorage,
@@ -179,10 +180,15 @@ function Profile() {
           />
           <input
             type="submit"
-            value={loading ? "LOading..." : "Update"}
+            value={loading ? "LOADING..." : "UPDATE"}
             disabled={loading}
             className="uppercase bg-green-700 text-white rounded-lg p-3  hover:opacity-80"
           />
+          <Link to="/create-listing"
+          className="uppercase bg-emerald-700 text-white rounded-lg p-3  hover:opacity-80 text-center"
+          >
+            Create Listing
+          </Link>
         </form>
         <div className="flex justify-between mt-5">
           <span
