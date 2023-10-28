@@ -9,10 +9,12 @@ app.use(cookieParser());
 const dbconfig = require("./config/dbconfig");
 const userRouter = require("./routes/user.route");
 const authRouter = require("./routes/auth.route");
+const createListing = require("./routes/listing.route");
 
 
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/listing", createListing);
 
 app.listen(port, () => console.log(`NODE JS SERVER IS STARTED AT ${port}`));
 
