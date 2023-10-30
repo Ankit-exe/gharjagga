@@ -122,7 +122,6 @@ function CreateListing() {
       if(formData.regularPrice < +formData.discountPrice) return setError('Discount price must br lower than regular price.')
       setLoading(true);
       setError(false);
-      const userRef = mongoose.Types.ObjectId(currentUser._id);
       const res = await fetch('/api/listing/create',
       {
         method:'POST',

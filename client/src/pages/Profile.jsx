@@ -34,7 +34,12 @@ function Profile() {
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [showListingError,setShowListingError] = useState(false);
+  const [userListings , setUserListings] = useState([]);
+
   const dispatch = useDispatch();
+
+
   useEffect(() => {
     if (file) {
       handleFileUpload(file);
@@ -124,6 +129,23 @@ function Profile() {
     }
   };
 
+  const handleShowListing = async() =>
+  {
+    try {
+      setShowListingError(false);
+      const res = await fetch(`api/user/listing/${currentUser._id}`);
+      const data = await res.json();
+      if(data.success === false)
+      {
+        showListingError(true);
+      }
+      setUserListings(data);
+    } catch (error) {
+      showListingError(true);
+    }
+
+  }
+
   return (
     <div className="p-3 max-w-lg mx-auto">
       <div>
@@ -206,9 +228,33 @@ function Profile() {
         </div>
       </div>
       <p className="text-red-700 mt-5">{error ? error : ""}</p>
-      <p className="text-green-700">
+      <p className="text-green-400">
         {updateSuccess ? "User is updated succesfully !" : ""}
       </p>
+      <button onClick={handleShowListing} className="text-green-600 w-full hover:opacity-75  font-medium">Show Listing</button>
+      <p className="text-red-700 mt-5">{showListingError ? 'Error Showing listings' : ''}</p>
+
+       <div className="flex flex-col gap-4">
+
+        <h1 className="text-center  text-2xl font-semibold">Your Listings</h1>
+       {userListings && userListings.length > 0  && 
+        userListings.map((listing) => 
+        (
+          <div key={listing._id} className="border rounded-lg p-3 flex justify-between items-center  gap-4">
+            <Link to={`/listing/${listing._id}`}>
+              <img src={listing.imageUrls[0]} alt="listing cover" className="h-16 w-16 object-contain " />
+            </Link>
+            <Link className="text-green-700 font-semibold flex-1 hover:underline truncate" to={`/listing/${listing._id}`}>
+              <p >{listing.name}</p>
+            </Link>
+            <div className="flex flex-col items-center">
+              <button className="text-red-700 uppercase">Delete</button>
+              <button className="text-green-600 uppercase">Edit</button>
+            </div>
+          </div>
+        )
+       )}
+</div>
     </div>
   );
 }
