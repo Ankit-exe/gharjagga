@@ -263,7 +263,7 @@ function Profile() {
           {userListings &&
             userListings.length > 0 &&
             userListings.map((listing) => (
-              <>
+              
                 <div
                   key={listing._id}
                   className="border rounded-lg p-3 flex justify-between items-center  gap-4"
@@ -284,14 +284,16 @@ function Profile() {
                   <div className="flex flex-col items-center">
                     <button
                       onClick={() => handleDeleteListing(listing._id)}
-                      className="text-red-700 uppercase"
+                      className="text-red-700 uppercase hover:text-red-300"
                     >
                       Delete
                     </button>
-                    <button className="text-green-600 uppercase">Edit</button>
+                    <Link to={`/update-listing/${listing._id}`} >
+                    <button className="text-green-600 uppercase hover:text-yellow-700">Edit</button>
+                    </Link>
                   </div>
                 </div>
-              </>
+              
             ))}
         </div>
       )}
