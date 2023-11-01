@@ -34,7 +34,7 @@ function UpdateListing() {
   const {currentUser} = useSelector(state => state.user)
   const navigate = useNavigate();
   const params = useParams();
-  
+  console.log(formData)
   useEffect(() =>
   {
       const fetchListing = async () =>
